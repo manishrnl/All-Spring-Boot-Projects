@@ -1,0 +1,36 @@
+# --- Compiled Output ---
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# --- Build Tool Folders ---
+target/
+build/
+.gradle/
+.mtl.bin/
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+# If you want to share project-wide run configurations,
+# uncomment the line below:
+# !.idea/runConfigurations
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
+
+# --- Sensitive Info / Local Config ---
+.env
+.env.local
+application-local.properties

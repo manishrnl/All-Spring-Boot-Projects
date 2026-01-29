@@ -1,0 +1,16 @@
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+
+    fetch-registry: false
+
+spring:
+  application:
+    name: discovery-service
+  cloud:
+    import: optional:configserver:http://localhost:8888
+    config:
+      enabled: false
+      fail-fast: true
