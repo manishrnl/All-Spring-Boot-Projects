@@ -17,10 +17,11 @@ import java.util.List;
 public class ConnectionsController {
     private final ConnectionService connectionService;
 
-    @GetMapping("/{userId}/deg-1")
-    public ResponseEntity<List<PersonEntity>> get1DegreeConnections(@PathVariable Long userId) {
-        return ResponseEntity.ok(connectionService.get1DegreeConnections(userId));
+    @GetMapping("/deg-1")
+    public ResponseEntity<List<PersonEntity>> get1DegreeConnections() {
+        return ResponseEntity.ok(connectionService.get1DegreeConnections());
     }
+
 
     @GetMapping("/{userId}/deg-2")
     public ResponseEntity<List<PersonEntity>> get2DegreeConnections(@PathVariable Long userId) {

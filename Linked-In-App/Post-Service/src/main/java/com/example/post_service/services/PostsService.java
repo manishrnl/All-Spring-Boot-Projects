@@ -1,16 +1,19 @@
 package com.example.post_service.services;
 
+import com.example.post_service.auth.UserContextHolder;
+import com.example.post_service.clients.Connections;
+import com.example.post_service.dto.PersonDto;
+import com.example.post_service.dto.PostCreateRequestDto;
+import com.example.post_service.dto.PostDto;
+import com.example.post_service.entity.PostEntity;
+import com.example.post_service.exceptions.ResourceNotFoundException;
+import com.example.post_service.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.example.post_service.dto.PostCreateRequestDto;
-import com.example.post_service.dto.PostDto;
-import com.example.post_service.entity.PostEntity;
-import com.example.post_service.exceptions.ResourceNotFoundException;
-import com.example.post_service.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +28,7 @@ public class PostsService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
     private final String CACHE_NAME = "posts";
+    private final Connections connectionClient;
 
     @CachePut(cacheNames = CACHE_NAME, key = "#result.id")
     public PostDto createPosts(PostCreateRequestDto postsReqDto, Long userId) {
@@ -38,12 +42,15 @@ public class PostsService {
 
     @Cacheable(cacheNames = CACHE_NAME, key = "#postsId")
     public PostDto getPostsById(Long postsId) {
+        log.debug("Retrieving post with ID: {}", postsId);
+        Long userId = UserContextHolder.getCurrentUserId();
 
+        List<PersonDto> firstDegConn = connectionClient.get1DegreeConnections();
+        log.info("Printing 1st degree  connections:" + firstDegConn.toString());
         Optional<PostEntity> postEntity = Optional.of(postRepository.findById(postsId).orElseThrow(() -> new ResourceNotFoundException("User does not exists")));
 
         return modelMapper.map(postEntity, PostDto.class);
     }
-
 
     @Cacheable(cacheNames = CACHE_NAME, key = "#userId")
     public List<PostDto> getAllPostsOfUser(Long userId) {
@@ -54,6 +61,4 @@ public class PostsService {
                 .collect(Collectors.toList());
         return allPosts;
     }
-
-
 }
