@@ -3,7 +3,7 @@ server:
 
 jwt:
   secretKey: sdfgfgdsfg7sd890fgsdfgsidfjgskdjfhglwut9w834ut90jkfjsdfgw9483utoegdfklgndfgowejt59u6
-# Bearer Token->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJYLVVzZXItSWQiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTgxNjIzOTAyMn0.BhKiVmkFs8UNZYJDCTOzw5XoLgsrZqn3yXNUHw00q0s
+# Bearer Token->  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJYLVVzZXItSWQiOjYsIm5hbWUiOiJNYW5pc2ggS3VtYXIiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxODE2MjM5MDIyfQ.ZOwdDlXC0V18PNVP7Zp8lNthIyp-GpWxEF97d7HO9Fg
 eureka:
   client:
     service-url:
